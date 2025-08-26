@@ -1,0 +1,1007 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ripki store</title>
+    <style>
+        /* Reset CSS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Variabel CSS */
+        :root {
+            --primary-color: #AF4049;
+            --dark-color: #82B0BF;
+            --darker-color: #5A8FA8;
+            --light-color: #333333;
+            --lighter-color: #ffffff;
+            --background-color: #ffffff;
+            --transition: all 0.3s ease;
+        }
+
+        body {
+            background-color: var(--background-color);
+            color: var(--light-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            overflow-x: hidden;
+        }
+
+        /* Notification Popup */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: #25D366;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            z-index: 9999;
+            transform: translateX(150%);
+            transition: transform 0.3s ease;
+        }
+        
+        .notification.show {
+            transform: translateX(0);
+        }
+        
+        .notification i {
+            margin-right: 10px;
+            font-size: 1.2rem;
+        }
+        
+        .notification-close {
+            margin-left: 15px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        /* Popup Iklan */
+        .popup-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .popup-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .popup-content {
+            position: relative;
+            max-width: 90%;
+            max-height: 90vh;
+        }
+
+        .popup-content img {
+            width: 100%;
+            height: auto;
+            max-height: 90vh;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(175, 64, 73, 0.5);
+            border: 2px solid var(--primary-color);
+        }
+
+        .close-popup {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: var(--primary-color);
+            border: none;
+            color: var(--lighter-color);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Header */
+        header {
+            background-color: var(--dark-color);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 10px rgba(175, 64, 73, 0.1);
+            position: relative;
+            z-index: 100;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+
+        .logo-container:active {
+            transform: scale(0.95);
+        }
+
+        .logo-img {
+            max-width:120px;
+            margin-right: 10px;
+            object-fit: cover;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            background: none;
+            border: none;
+            padding: 0.5rem;
+        }
+
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 5px 0;
+            transition: var(--transition);
+        }
+
+        /* Sidebar */
+        .sidebar {
+            width: 250px;
+            height: 100vh;
+            background-color: var(--dark-color);
+            position: fixed;
+            top: 0;
+            left: -250px;
+            transition: var(--transition);
+            z-index: 100;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .sidebar.active {
+            left: 0;
+        }
+
+        .profile-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem 1rem;
+            background-color: rgba(175, 64, 73, 0.1);
+            border-bottom: 1px solid rgba(175, 64, 73, 0.2);
+        }
+
+        .profile-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .profile-name {
+            font-weight: bold;
+            color: var(--light-color);
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-email {
+            font-size: 0.8rem;
+            color: var(--light-color);
+            opacity: 0.8;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+            padding-top: 1rem;
+        }
+
+        .sidebar-menu li {
+            padding: 1rem 2rem;
+            border-bottom: 1px solid rgba(175, 64, 73, 0.1);
+            transition: var(--transition);
+        }
+
+        .sidebar-menu li:hover {
+            background-color: rgba(175, 64, 73, 0.1);
+        }
+
+        .sidebar-menu li a {
+            color: var(--light-color);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .sidebar-menu li a i {
+            margin-right: 10px;
+            color: var(--primary-color);
+        }
+
+        /* Main Content */
+        main {
+            flex: 1;
+            padding: 2rem;
+            margin-left: 0;
+            transition: var(--transition);
+            background-color: var(--background-color);
+        }
+
+        main.active {
+            margin-left: 250px;
+        }
+
+        /* Slider */
+        .slider-container {
+            position: relative;
+            max-width: 100%;
+            margin: 2rem 0;
+            overflow: hidden;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slide {
+            min-width: 100%;
+            position: relative;
+        }
+
+        .slide img {
+            width: 100%;
+            display: block;
+            max-height: 400px;
+            object-fit: cover;
+        }
+
+        .slide-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 2rem;
+            color: white;
+        }
+
+        .slide-content h2 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+        }
+
+        .slider-nav {
+            position: absolute;
+            top: 50%;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            transform: translateY(-50%);
+            padding: 0 1rem;
+        }
+
+        .slider-nav button {
+            background-color: rgba(175, 64, 73, 0.5);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: var(--transition);
+        }
+
+        .slider-nav button:hover {
+            background-color: var(--primary-color);
+        }
+
+        .slider-dots {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+        }
+        .bc {
+            background-image: url('canva.jpg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+            width: 100%;
+            height: 100%;
+            border-radius:5px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: rgba(255, 255, 255, 0.5);
+            margin: 0 5px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .dot.active {
+            background-color: var(--primary-color);
+        }
+
+        a {
+            text-decoration:none;
+            color: var(--light-color);
+        }
+
+        /* Game Grid */
+        .section-title {
+            margin: 2rem 0 1rem;
+            color: var(--primary-color);
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        /* New Promo Cards Section */
+        .promo-cards-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .promo-card {
+            position: relative;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px #AF4049;
+            transition: var(--transition);
+        }
+
+        .promo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(175, 64, 73, 0.3);
+        }
+
+        .promo-card img {
+            width: 100%;
+            display: block;
+            max-height: 300px;
+            object-fit: cover;
+        }
+
+        .promo-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0, 0, 0, 0.8));
+            padding: 1.5rem;
+            color: white;
+        }
+
+        .promo-content h3 {
+            color: var(--primary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .promo-content p {
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .promo-btn {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            margin-top: 0.5rem;
+            transition: var(--transition);
+        }
+
+        .promo-btn:hover {
+            background-color: var(--darker-color);
+            transform: translateY(-2px);
+        }
+
+        @media (min-width: 768px) {
+            .games-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .game-card {
+            background-color: var(--lighter-color);
+            border-radius: 10px;
+            overflow: hidden;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px #AF4049;
+            text-align: center;
+            padding: 1.5rem 1px;
+            border: 1px solid rgba(175, 64, 73, 0.1);
+        }
+
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(175, 64, 73, 0.2);
+            border-color: var(--primary-color);
+        }
+
+        .game-card img {
+            width: 80px;
+            height: 80px;
+            border-radius:10px;
+            object-fit: contain;
+            margin-bottom: 1rem;
+            filter: drop-shadow(0 0 5px rgba(175, 64, 73, 0.3));
+        }
+
+        .game-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+            color: var(--light-color);
+        }
+
+        .game-card p {
+            font-size: 0.8rem;
+            color: var(--light-color);
+            opacity: 0.8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark-color);
+            padding: 2rem;
+            text-align: center;
+            margin-top: auto;
+            border-top: 1px solid rgba(175, 64, 73, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links a {
+            color: var(--light-color);
+            text-decoration: none;
+            margin: 0 1rem;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+        }
+
+        .social-icons {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+
+        .social-icons a {
+            color: var(--light-color);
+            font-size: 1.5rem;
+            margin: 0 0.5rem;
+            transition: var(--transition);
+        }
+
+        .social-icons a:hover {
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+
+        .copyright {
+            font-size: 0.8rem;
+            color: var(--light-color);
+            opacity: 0.7;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hamburger {
+                display: block;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(7px, -6px);
+            }
+
+            main.active {
+                margin-left: 0;
+            }
+
+            .games-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+<body>
+    <!-- Notification Popup -->
+    <div class="notification" id="notification">
+        <i class="fas fa-exclamation-circle"></i>
+        <span id="notificationText">Tolong jangan spam klik!</span>
+        <span class="notification-close" id="closeNotification">&times;</span>
+    </div>
+
+    <!-- Popup Iklan Gambar Saja -->
+    <div class="popup-overlay" id="popup">
+        <div class="popup-content">
+            <button class="close-popup" id="closePopup">&times;</button>
+            <a href="https://wa.me/6282116359852">
+            <img src="iklan.jpg" alt="Promo Spesial">
+            </a>
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header>
+        <div class="logo-container" id="logo">
+            <img src="logo.jpg" alt="Ripki store Logo" class="logo-img">
+            <div class="logo">Ripki store</div>
+        </div>
+        <button class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </header>
+
+    <!-- Sidebar -->
+    <nav class="sidebar">
+        <div class="profile-section">
+            <img src="logo.jpg" alt="Profile Photo" class="profile-img">
+            <div class="profile-name">Ripki store</div>
+            <div class="profile-email">pittkawai</div>
+        </div>
+        <ul class="sidebar-menu">
+            <li><a href="index.html"><i class="fas fa-home"></i> Beranda</a></li>
+            <li><a href="https://whatsapp.com/channel/0029VaiFhoz8kyyM2SsR6A0l"><i class="far fa-comments"></i> Chanel</a></li>
+            <li><a href="https://chat.whatsapp.com/LoP7xJiPxjkEPj6Mb9DlUO?mode=ems_copy_c"><i class="fas fa-user"></i> group</a></li>
+            <li><a href="https://wa.me/628216359852"><i class="fas fa-question-circle"></i> Bantuan</a></li>
+            <li><a href="mailto:Ripki221@gmail.com"><i class="fas fa-envelope"></i> Kontak</a></li>
+        </ul>
+    </nav>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Slider -->
+        <div class="slider-container">
+            <div class="slider">
+                <div class="slide">
+                    <img src="iklan.jpg" alt="Promo 1">
+                    <div class="slide-content">
+                        <h2 style=color:aqua;>WELCOME</h2>
+                        <p>selamat datang di Ripki store </p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="iklan.jpg" alt="Promo 2">
+                    <div class="slide-content">
+                        <h2>Gift Starlight!</h2>
+                        <p>kami menyediakan gift starlight lohhh!!</p>
+                    </div>
+                </div>
+                <div class="slide">
+                    <img src="iklan.jpg" alt="Promo 3">
+                    <div class="slide-content">
+                        <h2 style=color:aqua>WDP luar</h2>
+                        <p>kami menyediakan Weekly Diamond Pass untuk setiap negara!!!</p>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-nav">
+                <button class="prev"><i class="fas fa-chevron-left"></i></button>
+                <button class="next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            <div class="slider-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+        </div>
+
+        <!-- Game Grid - 8 Items -->
+        <h2 class="section-title">Pilih Game</h2>
+        <div class="games-grid">
+            <div class="game-card">
+                <a href="ml.html">
+                <img src="ml.jpg" alt="Mobile Legends">
+                <h3>Mobile Legends</h3>
+                </a>
+            </div>
+            <div class="game-card">
+                <a href="ff.html">
+                <img src="ff.jpg" alt="Free Fire">
+                <h3>Free Fire</h3>
+                </a>
+            </div>
+            <div class="game-card">
+                <a href="pubg.html">
+                <img src="pubg.jpg" alt=""> 
+                <h3>PUBG Mobile</h3>
+                </a>
+            </div>
+            <div class="game-card">
+                <a href="gensin.html">
+                <img src="gensin.jpg" alt="Genshin Impact">
+                <h3>Genshin Impact</h3>
+                </a>
+            </div>
+            <div class="game-card">
+                <a href="hsr.html">
+                <img src="hsr.jpg" alt="PUBG Mobile">
+                <h3>Honkai: Star rail</h3>
+               </a>
+            </div>
+            <div class="game-card">
+                <a href="cod.html">
+                <img src="cod.jpg" alt="COD Mobile"> 
+                <h3>COD Mobile</h3>
+                </a>
+            </div>
+            <div class="game-card">
+                <a href="hok.html">
+                <img src="hok.jpg" alt="">
+                <h3>Honor of Kings</h3>
+                </a>
+            </div>
+            <div class="game-card">
+                <a href="aov.html">
+                <img src="aov.jpg" alt="DOTA 2">
+                <h3>Garena AOV</h3>
+                </a>
+            </div>
+        </div>                
+                
+        <!-- New Promo Cards Section -->
+        <h2 class="section-title">Promo Hari Ini</h2>
+        <div class="promo-cards-container">
+            <div class="promo-card">
+                <img src="iklan.jpg" alt="Promo Canva Premium">
+                <div class="promo-content">
+                    <h3 style=color:#fff100;>Aplikasi Premium</h3>
+                    <p>menyediakan berbagai aplikasi premium!!</p>
+                    <a href="https://wa.me/628216359852?text=HALO%20kak%20saya%20mau%20beli%20apikasi%20premium" class="promo-btn">Pesan Sekarang</a>
+                </div>
+            </div>
+            
+            <div class="promo-card">
+                <img src="iklan.jpg" alt="Promo Game Mobile">
+                <div class="promo-content">
+                    <h3>paid edit</h3>
+                              <p>tersedia juga jasa edit konten lohh!!</p>
+                    <a href="https://wa.me/628216359852?text=HALO%20kak%20saya%20mau%20pakai%20jasa%20*paid%20edit*" class="promo-btn">Lihat Detail</a>
+                </div>
+            </div>
+            
+            <div class="promo-card">
+                <img src="iklan.jpg" alt="Promo Member Baru">
+                <div class="promo-content">
+                    <h3 style=color:aqua;>Bonus Pembelian Pertama</h3>
+                    <p> 
+
+ pembelian pertama dapet 5dm, stiker free bebas req char, 50k free viwes tiktok.</p>
+                    <a href="https://wa.me/628216359852?text=Halo%20kak%20saya%20mau%20liat%20daftar%20*kebutuhan%20sosmed*" class="promo-btn">Daftar Sekarang</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">Ripki storeStor ID</div>
+            <div class="footer-links">
+                <a href="#">Tentang Kami</a>
+                <a href="#">Kebijakan Privasi</a>
+                <a href="#">Syarat & Ketentuan</a>
+                <a href="#">FAQ</a>
+                <a href="#">Kontak</a>
+            </div>
+            <div class="social-icons">
+                <a href="https://www.tiktok.com/@ch1chann?_t=ZS-8xGjo4fnpRZ&_r=1"><i class="fab fa-tiktok"></i></a>         
+                <a href="https://wa.me/628216359852"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <div class="copyright">
+                &copy; 2025 Ripki storeStor ID. powe by ripki.
+            </div>
+        </div>
+    </footer>
+
+    <!-- Audio Elements (hidden) - Format berbeda untuk kompatibilitas browser -->
+    <audio id="sound1">
+        <source src="1.mp3" type="audio/mpeg">
+        <source src="1.mp3" type="audio/ogg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+    <audio id="sound2">
+        <source src="2.mp3" type="audio/mpeg">
+        <source src="2.mp3" type="audio/ogg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+    <audio id="sound3">
+        <source src="3.mp3" type="audio/mpeg">
+        <source src="3.mp3" type="audio/ogg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+    <audio id="sound4">
+        <source src="4.mp3" type="audio/mpeg">
+        <source src="4.mp3" type="audio/ogg">
+        Browser Anda tidak mendukung elemen audio.
+    </audio>
+
+    <script>
+        // Hamburger Menu
+        const hamburger = document.querySelector('.hamburger');
+        const sidebar = document.querySelector('.sidebar');
+        const main = document.querySelector('main');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            sidebar.classList.toggle('active');
+            main.classList.toggle('active');
+        });
+
+        // Slider
+        const slider = document.querySelector('.slider');
+        const slides = document.querySelectorAll('.slide');
+        const prevBtn = document.querySelector('.prev');
+        const nextBtn = document.querySelector('.next');
+        const dots = document.querySelectorAll('.dot');
+
+        let currentIndex = 0;
+        const slideCount = slides.length;
+
+        function updateSlider() {
+            slider.style.transform = `translateX(-${currentIndex * 100}%)`;
+            
+            // Update dots
+            dots.forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentIndex);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % slideCount;
+            updateSlider();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + slideCount) % slideCount;
+            updateSlider();
+        }
+
+        nextBtn.addEventListener('click', nextSlide);
+        prevBtn.addEventListener('click', prevSlide);
+
+        // Auto slide
+        let slideInterval = setInterval(nextSlide, 5000);
+
+        // Pause on hover
+        slider.addEventListener('mouseenter', () => {
+            clearInterval(slideInterval);
+        });
+
+        slider.addEventListener('mouseleave', () => {
+            slideInterval = setInterval(nextSlide, 5000);
+        });
+
+        // Dot navigation
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentIndex = index;
+                updateSlider();
+            });
+        });
+
+        // Popup Iklan
+        const popup = document.getElementById('popup');
+        const closePopup = document.getElementById('closePopup');
+
+        // Tampilkan popup setelah 1 detik
+        setTimeout(() => {
+            popup.classList.add('active');
+        }, 1000);
+
+        // Tutup popup
+        closePopup.addEventListener('click', () => {
+            popup.classList.remove('active');
+        });
+
+        // Tutup popup saat klik di luar konten
+        popup.addEventListener('click', (e) => {
+            if (e.target === popup) {
+                popup.classList.remove('active');
+            }
+        });
+
+        // Notification System
+        const notification = document.getElementById('notification');
+        const notificationText = document.getElementById('notificationText');
+        const closeNotification = document.getElementById('closeNotification');
+        
+        function showNotification(message) {
+            notificationText.textContent = message;
+            notification.classList.add('show');
+            
+            // Auto hide after 3 seconds
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 3000);
+        }
+        
+        closeNotification.addEventListener('click', () => {
+            notification.classList.remove('show');
+        });
+
+        // Logo click sound effect dengan kompatibilitas browser
+        const logo = document.getElementById('logo');
+        const sounds = [
+            document.getElementById('sound1'),
+            document.getElementById('sound2'),
+            document.getElementById('sound3'),
+            document.getElementById('sound4')
+        ];
+
+        // Click delay system
+        let lastClickTime = 0;
+        let clickCount = 0;
+        const clickDelay = 2000; // 2 seconds delay
+        const maxClicks = 3; // Max clicks before showing warning
+
+        // Fungsi untuk memainkan suara yang kompatibel
+        function playSound(sound) {
+            // Hentikan suara jika sedang diputar
+            sound.pause();
+            sound.currentTime = 0;
+            
+            // Coba memainkan suara
+            const playPromise = sound.play();
+            
+            // Tangani error jika autoplay diblokir
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    console.log("Autoplay prevented:", error);
+                    // Tampilkan UI untuk interaksi pengguna
+                    showNotification("Silakan klik logo sekali lagi untuk memutar suara");
+                });
+            }
+        }
+
+        // Interaksi pertama untuk mengaktifkan audio
+        let audioEnabled = false;
+        
+        logo.addEventListener('click', () => {
+            const currentTime = new Date().getTime();
+            
+            // Check if clicks are too fast
+            if (currentTime - lastClickTime < clickDelay) {
+                clickCount++;
+                
+                // Show warning if clicking too fast
+                if (clickCount >= maxClicks) {
+                    showNotification("Tolong jangan spam klik!");
+                    clickCount = 0; // Reset counter
+                    return; // Don't proceed with sound
+                }
+            } else {
+                clickCount = 0; // Reset counter if time between clicks is enough
+            }
+            
+            lastClickTime = currentTime;
+            
+            if (!audioEnabled) {
+                // Aktifkan audio pada interaksi pertama
+                audioEnabled = true;
+                sounds.forEach(sound => {
+                    sound.volume = 0.5; // Set volume ke 50%
+                });
+                return;
+            }
+            
+            // Get a random sound
+            const randomIndex = Math.floor(Math.random() * sounds.length);
+            const selectedSound = sounds[randomIndex];
+            
+            // Play the sound
+            playSound(selectedSound);
+            
+            // Add click animation
+            logo.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                logo.style.transform = 'scale(1)';
+            }, 100);
+        });
+
+        // Aktifkan audio setelah interaksi pengguna pertama dengan halaman
+        document.body.addEventListener('click', () => {
+            if (!audioEnabled) {
+                sounds.forEach(sound => {
+                    sound.volume = 0;
+                    sound.play().then(() => {
+                        sound.pause();
+                        sound.currentTime = 0;
+                        sound.volume = 0.5;
+                    });
+                });
+            }
+        }, { once: true });
+    </script>
+</body>
+</html>

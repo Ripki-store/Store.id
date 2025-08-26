@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Up Hongkai: Star Rail</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #1E88E5, #0D47A1);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .back-btn {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+        
+        .header h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title .number {
+            background-color: #1E88E5;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            background-color: #ffffff;
+        }
+        
+        .note {
+            font-size: 13px;
+            color: #777;
+            margin-top: 5px;
+        }
+        
+        .popular-tag {
+            background-color: #E3F2FD;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #0D47A1;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .edition-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1E88E5;
+            margin: 15px 0 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .cp-option {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background-color: #ffffff;
+        }
+        
+        .cp-option:hover {
+            border-color: #1E88E5;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .cp-option.selected {
+            border-color: #1E88E5;
+            background-color: #E3F2FD;
+        }
+        
+        .cp-amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1E88E5;
+            margin-bottom: 5px;
+        }
+        
+        .cp-price {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .cp-type {
+            font-size: 13px;
+            color: #666;
+            margin-top: 3px;
+        }
+        
+        .checkout-btn {
+            background: linear-gradient(to right, #1E88E5, #0D47A1);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .checkout-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 136, 229, 0.3);
+        }
+        
+        .checkout-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTE1LjQxLDE2LjU4TDEwLjgzLDEyTDE1LjQxLDcuNDFMMTQsNkw4LDEyTDE0LDE4TDE1LjQxLDE2LjU4WiIgZmlsbD0id2hpdGUiLz48L3N2Zz4=" alt="Back" class="back-btn" onclick="window.history.back()">
+            <h1>🔥 TOP UP HONGKAI: STAR RAIL 🔥</h1>
+            <p>Isi Oneiric resmi dan aman</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <div class="section-title">
+                    <div class="number">1</div>
+                    <span>Masukkan Player ID</span>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Masukkan ID Hongkai: Star Rail</label>
+                    <input type="text" class="input-field" id="player-id" placeholder="Contoh: 1234567890">
+                </div>
+                
+                <p class="note">Player ID bisa ditemukan di menu Profil dalam game</p>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">
+                    <div class="number">2</div>
+                    <span>Pilih Nominal Oneiric</span>
+                </div>
+                
+                <div class="popular-tag">⚡ Produk terlaris bulan ini</div>
+                
+                <div class="edition-title">Paket Oneiric</div>
+                <div class="cp-grid" id="oneiric-options">
+                    <!-- Oneiric options will be populated by JavaScript -->
+                </div>
+                
+                <div class="edition-title">Paket Lainnya</div>
+                <div class="cp-grid" id="other-options">
+                    <!-- Other options will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <button id="checkout-btn" class="checkout-btn" disabled>Lanjutkan Pembayaran</button>
+        </div>
+    </div>
+
+    <script>
+        // Product data
+        const products = {
+            oneiric: [
+                { name: "60 Oneiric", amount: "60", price: 12000 },
+                { name: "330 Oneiric", amount: "330", price: 59500 },
+                { name: "980 + 110 Oneiric", amount: "1090", price: 180000 },
+                { name: "1980 + 260 Oneiric", amount: "2240", price: 365000 }
+            ],
+            other: [
+                { name: "Express Supply Pass", amount: "Pass", price: 59000 }
+            ]
+        };
+        
+        // Selected variables
+        let selectedPlayerId = '';
+        let selectedProduct = null;
+        
+        // DOM elements
+        const oneiricOptionsContainer = document.getElementById('oneiric-options');
+        const otherOptionsContainer = document.getElementById('other-options');
+        const playerIdInput = document.getElementById('player-id');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        
+        // Render product options
+        function renderProductOptions() {
+            // Clear containers
+            oneiricOptionsContainer.innerHTML = '';
+            otherOptionsContainer.innerHTML = '';
+            
+            // Render Oneiric options
+            products.oneiric.forEach(product => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'cp-option';
+                optionElement.dataset.type = 'oneiric';
+                optionElement.dataset.id = product.amount;
+                
+                optionElement.innerHTML = `
+                    <div class="cp-amount">${product.name}</div>
+                    <div class="cp-price">Rp ${product.price.toLocaleString('id-ID')}</div>
+                    <div class="cp-type">Hongkai: Star Rail</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectProduct(product));
+                
+                oneiricOptionsContainer.appendChild(optionElement);
+            });
+            
+            // Render Other options
+            products.other.forEach(product => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'cp-option';
+                optionElement.dataset.type = 'other';
+                optionElement.dataset.id = product.name.replace(/\s+/g, '-').toLowerCase();
+                
+                optionElement.innerHTML = `
+                    <div class="cp-amount">${product.name}</div>
+                    <div class="cp-price">Rp ${product.price.toLocaleString('id-ID')}</div>
+                    <div class="cp-type">Hongkai: Star Rail</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectProduct(product));
+                
+                otherOptionsContainer.appendChild(optionElement);
+            });
+        }
+        
+        // Select product
+        function selectProduct(product) {
+            // Remove selected class from all options
+            document.querySelectorAll('.cp-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            const selectedElement = document.querySelector(`.cp-option[data-id="${product.amount || product.name.replace(/\s+/g, '-').toLowerCase()}"]`);
+            if (selectedElement) {
+                selectedElement.classList.add('selected');
+            }
+            
+            selectedProduct = product;
+            
+            // Enable checkout button if all fields are filled
+            updateCheckoutButtonState();
+        }
+        
+        // Update checkout button state based on form completion
+        function updateCheckoutButtonState() {
+            selectedPlayerId = playerIdInput.value.trim();
+            
+            if (selectedPlayerId && selectedProduct) {
+                checkoutBtn.disabled = false;
+            } else {
+                checkoutBtn.disabled = true;
+            }
+        }
+        
+        // Handle checkout
+        function handleCheckout() {
+            if (!selectedPlayerId || !selectedProduct) return;
+            
+            const message = `Halo, saya ingin top up Hongkai: Star Rail:
+            
+Player ID: ${selectedPlayerId}
+Paket: ${selectedProduct.name}
+Harga: Rp ${selectedProduct.price.toLocaleString('id-ID')}
+
+Mohon bantu proses pembayarannya. Terima kasih.`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/6282116359852/?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        // Event listeners
+        playerIdInput.addEventListener('input', updateCheckoutButtonState);
+        checkoutBtn.addEventListener('click', handleCheckout);
+        
+        // Initialize
+        renderProductOptions();
+    </script>
+</body>
+</html>

@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Up Mobile Legends</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .back-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10;
+            font-size: 24px;
+            text-decoration: none;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #3a7bd5, #00d2ff);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .header h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title .number {
+            background-color: #3a7bd5;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+        
+        .note {
+            font-size: 13px;
+            color: #777;
+            margin-top: 5px;
+        }
+        
+        .popular-tag {
+            background-color: #f8f9fa;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #555;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .tab-container {
+            margin-bottom: 20px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+        
+        .tab {
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #777;
+            position: relative;
+            flex-shrink: 0;
+        }
+        
+        .tab.active {
+            color: #3a7bd5;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #3a7bd5;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .diamond-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .diamond-option {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .diamond-option:hover {
+            border-color: #3a7bd5;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .diamond-option.selected {
+            border-color: #3a7bd5;
+            background-color: #f0f7ff;
+        }
+        
+        .diamond-amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: #3a7bd5;
+            margin-bottom: 5px;
+        }
+        
+        .diamond-price {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .checkout-btn {
+            background: linear-gradient(to right, #3a7bd5, #00d2ff);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .checkout-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(58, 123, 213, 0.3);
+        }
+        
+        .checkout-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .other-products {
+            margin-top: 20px;
+            border-top: 1px dashed #ddd;
+            padding-top: 20px;
+        }
+        
+        .server-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 20px 0 10px;
+            color: #3a7bd5;
+            text-align: center;
+            background-color: #f0f7ff;
+            padding: 8px;
+            border-radius: 8px;
+        }
+        
+        .other-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin: 20px 0 10px;
+            color: #ff6b6b;
+            text-align: center;
+            background-color: #fff0f0;
+            padding: 8px;
+            border-radius: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="#" class="back-btn" onclick="window.history.back(); return false;">&lt;</a>
+        
+        <div class="header">
+            <h1>Mobile Legends: Bang Bang</h1>
+            <p>Pembayaran yang Aman</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <div class="section-title">
+                    <div class="number">1</div>
+                    <span>Masukkan User ID</span>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Masukkan User ID (Zone ID)</label>
+                    <input type="text" class="input-field" id="user-id" placeholder="Contoh: 12345678(1234)">
+                </div>
+                
+                <p class="note">Untuk mengetahui User ID Anda, silakan klik menu profile dibagian kiri atas pada menu utama game. User ID akan terlihat dibagian bawah Nama Karakter Game Anda.</p>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">
+                    <div class="number">2</div>
+                    <span>Pilih Nominal Top Up</span>
+                </div>
+                    <div class="popular-tag"> ⚡ paling laris</div>
+                <div class="popular-tag">40.241 item dibeli dalam satu jam terakhir</div>
+                
+                <div class="tab-container">
+                    <div class="tabs">
+                        <div class="tab active" data-tab="indonesia">Indonesia</div>
+                        <div class="tab" data-tab="malay">Malaysia</div>
+                        <div class="tab" data-tab="global">Global</div>
+                        <div class="tab" data-tab="brazil">Brazil</div>
+                        <div class="tab" data-tab="russia">Russia</div>
+                        <div class="tab" data-tab="philippines">Philippines</div>
+                    </div>
+                    
+                    <div class="tab-content active" id="indonesia-tab">
+                        <div class="server-title">Diamond Receh</div>
+                        <div class="diamond-grid" id="indonesia-receh"></div>
+                        
+                        <div class="server-title">Diamond Ganda</div>
+                        <div class="diamond-grid" id="indonesia-ganda"></div>
+                        
+                        <div class="server-title">Diamond Ratusan</div>
+                        <div class="diamond-grid" id="indonesia-ratusan"></div>
+                        
+                        <div class="server-title">Diamond Ribuan</div>
+                        <div class="diamond-grid" id="indonesia-ribuan"></div>
+                        
+                        <div class="other-products">
+                            <div class="other-title">Produk Lainnya</div>
+                            <div class="diamond-grid" id="indonesia-other"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="malay-tab">
+                        <div class="server-title">Diamond Puluhan</div>
+                        <div class="diamond-grid" id="malay-puluhan"></div>
+                        
+                        <div class="server-title">Diamond Ratusan</div>
+                        <div class="diamond-grid" id="malay-ratusan"></div>
+                        
+                        <div class="server-title">Diamond Ribuan</div>
+                        <div class="diamond-grid" id="malay-ribuan"></div>
+                        
+                        <div class="server-title">Diamond Ganda</div>
+                        <div class="diamond-grid" id="malay-ganda"></div>
+                        
+                        <div class="other-products">
+                            <div class="other-title">Produk Lainnya</div>
+                            <div class="diamond-grid" id="malay-other"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="global-tab">
+                        <div class="server-title">First Topup Global</div>
+                        <div class="diamond-grid" id="global-first"></div>
+                        
+                        <div class="server-title">Diamond Global</div>
+                        <div class="diamond-grid" id="global-normal"></div>
+                        
+                        <div class="other-products">
+                            <div class="other-title">Produk Lainnya</div>
+                            <div class="diamond-grid" id="global-other"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="brazil-tab">
+                        <div class="server-title">Bonus Topup Brazil</div>
+                        <div class="diamond-grid" id="brazil-bonus"></div>
+                        
+                        <div class="server-title">Topup Normal</div>
+                        <div class="diamond-grid" id="brazil-normal"></div>
+                        
+                        <div class="other-products">
+                            <div class="other-title">Produk Lainnya</div>
+                            <div class="diamond-grid" id="brazil-other"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="russia-tab">
+                        <div class="server-title">Diamond Russia</div>
+                        <div class="diamond-grid" id="russia-diamond"></div>
+                        
+                        <div class="other-products">
+                            <div class="other-title">Produk Lainnya</div>
+                            <div class="diamond-grid" id="russia-other"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="philippines-tab">
+                        <div class="server-title">Diamond Philippines</div>
+                        <div class="diamond-grid" id="philippines-diamond"></div>
+                        
+                        <div class="server-title">Diamond Ganda</div>
+                        <div class="diamond-grid" id="philippines-ganda"></div>
+                        
+                        <div class="other-products">
+                            <div class="other-title">Produk Lainnya</div>
+                            <div class="diamond-grid" id="philippines-other"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="checkout-btn" class="checkout-btn" disabled>Lanjutkan Pembayaran</button>
+        </div>
+    </div>
+
+    <script>
+        // Product data with updated prices
+        const products = {
+            indonesia: {
+                receh: [
+                    { diamonds: 3, price: 1164 },
+                    { diamonds: 5, price: 1500 },
+                    { diamonds: 10, price: 3000 },
+                    { diamonds: 12, price: 3500 },
+                    { diamonds: 19, price: 5500 },
+                    { diamonds: 28, price: 8000 },
+                    { diamonds: 36, price: 10000 },
+                    { diamonds: 44, price: 11800 },
+                    { diamonds: 59, price: 16500 },
+                    { diamonds: 74, price: 20700 },
+                    { diamonds: 85, price: 22700 }
+                ],
+                ganda: [
+                    { name: "50 + 50", diamonds: 100, price: 15000 },
+                    { name: "150 + 150", diamonds: 300, price: 45000 },
+                    { name: "250 + 250", diamonds: 500, price: 75000 },
+                    { name: "500 + 500", diamonds: 1000, price: 148500 }
+                ],
+                ratusan: [
+                    { diamonds: 113, price: 30000 },
+                    { diamonds: 132, price: 35500 },
+                    { diamonds: 144, price: 38500 },
+                    { diamonds: 148, price: 42500 },
+                    { diamonds: 170, price: 45500 },
+                    { diamonds: 229, price: 59500 },
+                    { diamonds: 240, price: 64000 },
+                    { diamonds: 255, price: 68000 },
+                    { diamonds: 296, price: 78500 },
+                    { diamonds: 301, price: 79600 },
+                    { diamonds: 340, price: 90500 },
+                    { diamonds: 370, price: 103000 },
+                    { diamonds: 408, price: 108000 },
+                    { diamonds: 436, price: 115500 },
+                    { diamonds: 466, price: 124000 },
+                    { diamonds: 493, price: 130500 },
+                    { diamonds: 510, price: 135500 },
+                    { diamonds: 536, price: 142000 },
+                    { diamonds: 648, price: 172000 },
+                    { diamonds: 704, price: 186000 },
+                    { diamonds: 720, price: 192000 },
+                    { diamonds: 789, price: 209000 },
+                    { diamonds: 816, price: 215500 },
+                    { diamonds: 875, price: 226500 },
+                    { diamonds: 903, price: 233500 },
+                    { diamonds: 934, price: 241500 },
+                    { diamonds: 960, price: 248000 }
+                ],
+                ribuan: [
+                    { diamonds: 1000, price: 265000 },
+                    { diamonds: 1045, price: 271000 },
+                    { diamonds: 1115, price: 289000 },
+                    { diamonds: 1171, price: 303500 },
+                    { diamonds: 1283, price: 333000 },
+                    { diamonds: 1368, price: 355500 },
+                    { diamonds: 1453, price: 378000 },
+                    { diamonds: 1523, price: 396500 },
+                    { diamonds: 1691, price: 440500 },
+                    { diamonds: 1704, price: 441000 },
+                    { diamonds: 1750, price: 450500 },
+                    { diamonds: 1835, price: 472500 },
+                    { diamonds: 2010, price: 490000 },
+                    { diamonds: 2625, price: 675000 },
+                    { diamonds: 4020, price: 978000 },
+                    { diamonds: 4830, price: 1240000 },
+                    { diamonds: 6030, price: 1460000 },
+                    { diamonds: 8040, price: 1950000 }
+                ],
+                other: [
+                    { name: "WDP Promo", price: 25500 },
+                    { name: "WDP 1x", price: 26500 },
+                    { name: "WDP 2x", price: 53000 },
+                    { name: "WDP 3x", price: 79500 },
+                    { name: "WDP PO 23.000 (estimasi 2x24jam)", price: 23000 },
+                    { name: "Starlight Basic", price: 33000 },
+                    { name: "Starlight Prem", price: 73000 },
+                    { name: "PO Starlight Buldep", price: 30000 }
+                ]
+            },
+            malay: {
+                puluhan: [
+                    { diamonds: 14, price: 4000 },
+                    { diamonds: 42, price: 12000 },
+                    { diamonds: 70, price: 18800 }
+                ],
+                ratusan: [
+                    { diamonds: 140, price: 37000 },
+                    { diamonds: 284, price: 74000 },
+                    { diamonds: 355, price: 93000 },
+                    { diamonds: 429, price: 112000 },
+                    { diamonds: 716, price: 184000 }
+                ],
+                ribuan: [
+                    { diamonds: 1084, price: 274500 },
+                    { diamonds: 1446, price: 366000 },
+                    { diamonds: 2976, price: 735000 },
+                    { diamonds: 7502, price: 1788000 }
+                ],
+                ganda: [
+                    { name: "50 + 50", diamonds: 100, price: 15000 },
+                    { name: "150 + 150", diamonds: 300, price: 44000 },
+                    { name: "250 + 250", diamonds: 500, price: 73000 },
+                    { name: "500 + 500", diamonds: 1000, price: 145000 }
+                ],
+                other: [
+                    { name: "WDP 1x", price: 31500 },
+                    { name: "WDP 2x", price: 53000 },
+                    { name: "WDP 3x", price: 84500 },
+                    { name: "Buat Event", price: 32500 }
+                ]
+            },
+            global: {
+                first: [
+                    { name: "50 + 50", diamonds: 100, price: 12193 },
+                    { name: "150 + 150", diamonds: 300, price: 34513 },
+                    { name: "250 + 250", diamonds: 500, price: 55619 },
+                    { name: "500 + 500", diamonds: 1000, price: 112072 }
+                ],
+                normal: [
+                    { diamonds: 86, price: 18346 },
+                    { diamonds: 172, price: 35667 },
+                    { diamonds: 257, price: 53002 },
+                    { diamonds: 344, price: 70500 },
+                    { diamonds: 429, price: 87643 },
+                    { diamonds: 514, price: 104413 },
+                    { diamonds: 600, price: 121500 },
+                    { diamonds: 878, price: 175500 },
+                    { diamonds: 1050, price: 210000 },
+                    { diamonds: 1412, price: 279420 }
+                ],
+                other: [
+                    { name: "WDP 1x", price: 22500 },
+                    { name: "WDP 2x", price: 45000 },
+                    { name: "WDP 3x", price: 67500 }
+                ]
+            },
+            brazil: {
+                bonus: [
+                    { name: "50 + 50", diamonds: 100, price: 10624 },
+                    { name: "150 + 150", diamonds: 300, price: 30000 },
+                    { name: "250 + 250", diamonds: 500, price: 50000 },
+                    { name: "500 + 500", diamonds: 1000, price: 101500 }
+                ],
+                normal: [
+                    { diamonds: 86, price: 16092 },
+                    { diamonds: 172, price: 31500 },
+                    { diamonds: 257, price: 47017 },
+                    { diamonds: 344, price: 59397 },
+                    { diamonds: 429, price: 78500 },
+                    { diamonds: 516, price: 94500 },
+                    { diamonds: 706, price: 125700 },
+                    { diamonds: 878, price: 157200 },
+                    { diamonds: 963, price: 172700 },
+                    { diamonds: 1346, price: 235900 },
+                    { diamonds: 1825, price: 314000 },
+                    { diamonds: 2195, price: 377500 },
+                    { diamonds: 3688, price: 629000 }
+                ],
+                other: [
+                    { name: "Twilight Pass", price: 226000 },
+                    { name: "WDP 1x", price: 40500 },
+                    { name: "WDP 2x", price: 81000 },
+                    { name: "WDP 3x", price: 121500 }
+                ]
+            },
+            russia: {
+                diamond: [
+                    { diamonds: 8, price: 3500 },
+                    { diamonds: 35, price: 13000 },
+                    { diamonds: 88, price: 31500 },
+                    { name: "239 + 25", diamonds: 264, price: 93000 },
+                    { name: "396 + 44", diamonds: 440, price: 155000 },
+                    { name: "633 + 101", diamonds: 734, price: 250000 },
+                    { name: "791 + 142", diamonds: 933, price: 312000 },
+                    { name: "1186 + 224", diamonds: 1410, price: 465000 },
+                    { name: "1581 + 300", diamonds: 1881, price: 624000 },
+                    { name: "2371 + 474", diamonds: 2845, price: 936000 },
+                    { name: "5136 + 1027", diamonds: 6163, price: 2028235 }
+                ],
+                other: [
+                    { name: "WDP 1x", price: 40500 },
+                    { name: "WDP 2x", price: 81000 },
+                    { name: "WDP 3x", price: 121500 }
+                ]
+            },
+            philippines: {
+                diamond: [
+                    { diamonds: 5, price: 1500 },
+                    { diamonds: 11, price: 3000 },
+                    { diamonds: 22, price: 5500 },
+                    { diamonds: 56, price: 13200 },
+                    { diamonds: 112, price: 26000 },
+                    { diamonds: 223, price: 51500 },
+                    { diamonds: 336, price: 76500 },
+                    { diamonds: 570, price: 127000 },
+                    { diamonds: 1163, price: 251500 },
+                    { diamonds: 2398, price: 511500 },
+                    { diamonds: 6042, price: 1255571 }
+                ],
+                ganda: [
+                    { name: "50 + 50", diamonds: 100, price: 12800 },
+                    { name: "150 + 150", diamonds: 300, price: 38000 },
+                    { name: "250 + 250", diamonds: 500, price: 63000 },
+                    { name: "500 + 500", diamonds: 1000, price: 125500 }
+                ],
+                other: [
+                    { name: "WDP 1x", price: 25000 },
+                    { name: "WDP 2x", price: 50000 },
+                    { name: "WDP 3x", price: 75000 }
+                ]
+            }
+        };
+        
+        // Selected variables
+        let selectedUserId = '';
+        let selectedProductType = 'indonesia';
+        let selectedProduct = null;
+        
+        // DOM elements
+        const userIdInput = document.getElementById('user-id');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        // Render product options
+        function renderProductOptions() {
+            // Render Indonesia options
+            renderDiamondOptions('indonesia-receh', products.indonesia.receh, 'indonesia');
+            renderDiamondOptions('indonesia-ganda', products.indonesia.ganda, 'indonesia');
+            renderDiamondOptions('indonesia-ratusan', products.indonesia.ratusan, 'indonesia');
+            renderDiamondOptions('indonesia-ribuan', products.indonesia.ribuan, 'indonesia');
+            renderDiamondOptions('indonesia-other', products.indonesia.other, 'indonesia');
+            
+            // Render Malay options
+            renderDiamondOptions('malay-puluhan', products.malay.puluhan, 'malay');
+            renderDiamondOptions('malay-ratusan', products.malay.ratusan, 'malay');
+            renderDiamondOptions('malay-ribuan', products.malay.ribuan, 'malay');
+            renderDiamondOptions('malay-ganda', products.malay.ganda, 'malay');
+            renderDiamondOptions('malay-other', products.malay.other, 'malay');
+            
+            // Render Global options
+            renderDiamondOptions('global-first', products.global.first, 'global');
+            renderDiamondOptions('global-normal', products.global.normal, 'global');
+            renderDiamondOptions('global-other', products.global.other, 'global');
+            
+            // Render Brazil options
+            renderDiamondOptions('brazil-bonus', products.brazil.bonus, 'brazil');
+            renderDiamondOptions('brazil-normal', products.brazil.normal, 'brazil');
+            renderDiamondOptions('brazil-other', products.brazil.other, 'brazil');
+            
+            // Render Russia options
+            renderDiamondOptions('russia-diamond', products.russia.diamond, 'russia');
+            renderDiamondOptions('russia-other', products.russia.other, 'russia');
+            
+            // Render Philippines options
+            renderDiamondOptions('philippines-diamond', products.philippines.diamond, 'philippines');
+            renderDiamondOptions('philippines-ganda', products.philippines.ganda, 'philippines');
+            renderDiamondOptions('philippines-other', products.philippines.other, 'philippines');
+        }
+        
+        // Render diamond options to a container
+        function renderDiamondOptions(containerId, products, type) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            
+            container.innerHTML = '';
+            
+            products.forEach(product => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'diamond-option';
+                optionElement.dataset.type = type;
+                optionElement.dataset.id = product.diamonds ? product.diamonds : product.name.replace(/\s+/g, '-').toLowerCase();
+                
+                if (product.diamonds) {
+                    optionElement.innerHTML = `
+                        <div class="diamond-amount">${product.name ? product.name : product.diamonds} 💎</div>
+                        <div class="diamond-price">Rp ${product.price.toLocaleString('id-ID')},-</div>
+                    `;
+                } else {
+                    optionElement.innerHTML = `
+                        <div class="diamond-amount">${product.name}</div>
+                        <div class="diamond-price">Rp ${product.price.toLocaleString('id-ID')},-</div>
+                    `;
+                }
+                
+                optionElement.addEventListener('click', () => selectProduct(type, product));
+                container.appendChild(optionElement);
+            });
+        }
+        
+        // Select product
+        function selectProduct(type, product) {
+            // Remove selected class from all options
+            document.querySelectorAll('.diamond-option.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            const id = product.diamonds ? product.diamonds : product.name.replace(/\s+/g, '-').toLowerCase();
+            const selectedElement = document.querySelector(`.diamond-option[data-type="${type}"][data-id="${id}"]`);
+            if (selectedElement) {
+                selectedElement.classList.add('selected');
+            }
+            
+            selectedProductType = type;
+            selectedProduct = product;
+            
+            // Enable checkout button if all fields are filled
+            updateCheckoutButtonState();
+        }
+        
+        // Update checkout button state based on form completion
+        function updateCheckoutButtonState() {
+            selectedUserId = userIdInput.value.trim();
+            
+            if (selectedUserId && selectedProduct) {
+                checkoutBtn.disabled = false;
+            } else {
+                checkoutBtn.disabled = true;
+            }
+        }
+        
+        // Handle tab switching
+        function switchTab(tabName) {
+            // Update tabs
+            tabs.forEach(tab => {
+                if (tab.dataset.tab === tabName) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Update tab contents
+            tabContents.forEach(content => {
+                if (content.id === `${tabName}-tab`) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+            
+            // Clear selection when switching tabs
+            selectedProduct = null;
+            document.querySelectorAll('.diamond-option.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+            updateCheckoutButtonState();
+            
+            selectedProductType = tabName;
+        }
+        
+        // Handle checkout
+        function handleCheckout() {
+            if (!selectedUserId || !selectedProduct) return;
+            
+            let productName, productAmount;
+            
+            if (selectedProduct.diamonds) {
+                productName = 'Diamond';
+                productAmount = selectedProduct.name ? `${selectedProduct.name} (${selectedProduct.diamonds} 💎)` : `${selectedProduct.diamonds} 💎`;
+            } else {
+                productName = selectedProduct.name.includes('WDP') ? 'WDP' : 
+                            selectedProduct.name.includes('Starlight') ? 'Starlight Pass' : 
+                            selectedProduct.name.includes('Twilight') ? 'Twilight Pass' : 
+                            selectedProduct.name.includes('Event') ? 'Event' : 'Item';
+                productAmount = selectedProduct.name;
+            }
+            
+            const message = `Halo, saya ingin top up Mobile Legends:
+            
+Server: ${selectedProductType.toUpperCase()}
+User ID: ${selectedUserId}
+Paket ${productName}: ${productAmount}
+Harga: Rp ${selectedProduct.price.toLocaleString('id-ID')},-
+
+Mohon bantu proses pembayarannya. Terima kasih.`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/6282116359852?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        // Event listeners
+        userIdInput.addEventListener('input', updateCheckoutButtonState);
+        checkoutBtn.addEventListener('click', handleCheckout);
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+        });
+        
+        // Initialize
+        renderProductOptions();
+    </script>
+</body>
+</html>

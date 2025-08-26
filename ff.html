@@ -1,0 +1,566 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Up Free Fire</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #4b6cb7, #182848);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .back-button {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: white;
+            text-decoration: none;
+            font-size: 24px;
+        }
+        
+        .back-button img {
+            width: 24px;
+            height: 24px;
+            filter: brightness(0) invert(1);
+        }
+        
+        .header h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 20px;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title .number {
+            background-color: #4b6cb7;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+        }
+        
+        .note {
+            font-size: 13px;
+            color: #777;
+            margin-top: 5px;
+        }
+        
+        .popular-tag {
+            background-color: #f8f9fa;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #555;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .tab-container {
+            margin-bottom: 20px;
+        }
+        
+        .tabs {
+            display: flex;
+            border-bottom: 1px solid #eee;
+            margin-bottom: 15px;
+        }
+        
+        .tab {
+            padding: 10px 15px;
+            cursor: pointer;
+            font-weight: 500;
+            color: #777;
+            position: relative;
+        }
+        
+        .tab.active {
+            color: #4b6cb7;
+        }
+        
+        .tab.active::after {
+            content: '';
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: #4b6cb7;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .diamond-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .diamond-option {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .diamond-option:hover {
+            border-color: #4b6cb7;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .diamond-option.selected {
+            border-color: #4b6cb7;
+            background-color: #f0f5ff;
+        }
+        
+        .diamond-amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: #4b6cb7;
+            margin-bottom: 5px;
+        }
+        
+        .diamond-price {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .other-products {
+            margin-top: 20px;
+            border-top: 1px dashed #ddd;
+            padding-top: 20px;
+        }
+        
+        .other-products-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+        }
+        
+        .checkout-btn {
+            background: linear-gradient(to right, #4b6cb7, #182848);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .checkout-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(75, 108, 183, 0.3);
+        }
+        
+        .checkout-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a href="index.html" class="back-button">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTE1LjQxLDE2LjU4TDEwLjgzLDEyTDE1LjQxLDcuNDFMMTQsNkw4LDEyTDE0LDE4TDE1LjQxLDE2LjU4WiIgLz48L3N2Zz4=" alt="Back">
+            </a>
+            <h1>Free Fire Top Up</h1>
+            <p>Pembayaran yang Aman</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <div class="section-title">
+                    <div class="number">1</div>
+                    <span>Masukkan User ID</span>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Masukkan User ID</label>
+                    <input type="text" class="input-field" id="user-id" placeholder="Contoh: 123456789">
+                </div>
+                
+                <p class="note">Untuk mengetahui User ID Anda, buka game Free Fire dan periksa di bagian profil akun Anda.</p>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">
+                    <div class="number">2</div>
+                    <span>Pilih Nominal Top Up</span>
+                </div>
+                    <div class="popular-tag">⚡  paling laris</div>
+                <div class="popular-tag">40.040 item dibeli dalam satu jam terakhir</div>
+                
+                <div class="tab-container">
+                    <div class="tabs">
+                        <div class="tab active" data-tab="diamond">Diamond</div>
+                        <div class="tab" data-tab="malaysia">Malaysia</div>
+                    </div>
+                    
+                    <div class="tab-content active" id="diamond-tab">
+                        <div class="diamond-grid" id="diamond-options">
+                            <!-- Diamond options will be populated by JavaScript -->
+                        </div>
+                        
+                        <div class="other-products">
+                            <div class="other-products-title">Produk Lainnya</div>
+                            <div class="diamond-grid" id="diamond-other-options">
+                                <!-- Diamond other options will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-content" id="malaysia-tab">
+                        <div class="diamond-grid" id="malaysia-options">
+                            <!-- Malaysia options will be populated by JavaScript -->
+                        </div>
+                        
+                        <div class="other-products">
+                            <div class="other-products-title">Produk Lainnya</div>
+                            <div class="diamond-grid" id="malaysia-other-options">
+                                <!-- Malaysia other options will be populated by JavaScript -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <button id="checkout-btn" class="checkout-btn" disabled>Lanjutkan Pembayaran</button>
+        </div>
+    </div>
+
+    <script>
+        // Product data with updated prices
+        const products = {
+            diamond: [
+                { diamonds: 5, price: 864 },
+                { diamonds: 10, price: 1684 },
+                { diamonds: 15, price: 2548 },
+                { diamonds: 20, price: 3368 },
+                { diamonds: 50, price: 6820 },
+                { diamonds: 70, price: 9025 },
+                { diamonds: 100, price: 13640 },
+                { diamonds: 120, price: 16366 },
+                { diamonds: 140, price: 18537 },
+                { diamonds: 150, price: 20222 },
+                { diamonds: 200, price: 26651 },
+                { diamonds: 210, price: 29870 },
+                { diamonds: 355, price: 43550 },
+                { diamonds: 425, price: 52174 },
+                { diamonds: 500, price: 61550 },
+                { diamonds: 720, price: 86204 },
+                { diamonds: 1000, price: 120461 },
+                { diamonds: 1075, price: 130201 },
+                { diamonds: 1440, price: 172018 },
+                { diamonds: 2000, price: 239363 },
+                { diamonds: 2180, price: 260677 },
+                { diamonds: 3000, price: 358852 },
+                { diamonds: 3640, price: 437972 },
+                { diamonds: 7290, price: 862139 }
+            ],
+            diamondOther: [
+                { name: "BP Card", price: 41085 },
+                { name: "Level Up Pass", price: 13766 },
+                { name: "Membership Mingguan", price: 27765 },
+                { name: "Membership Bulanan", price: 80900 }
+            ],
+            malaysia: [
+                { diamonds: 100, price: 16000 },
+                { diamonds: 210, price: 46000 },
+                { diamonds: 1080, price: 142000 },
+                { diamonds: 2200, price: 286000 }
+            ],
+            malaysiaOther: [
+                { name: "Weekly Membership", price: 26000 },
+                { name: "Monthly Membership", price: 125000 }
+            ]
+        };
+        
+        // Selected variables
+        let selectedUserId = '';
+        let selectedProductType = 'diamond';
+        let selectedProduct = null;
+        
+        // DOM elements
+        const diamondOptionsContainer = document.getElementById('diamond-options');
+        const diamondOtherOptionsContainer = document.getElementById('diamond-other-options');
+        const malaysiaOptionsContainer = document.getElementById('malaysia-options');
+        const malaysiaOtherOptionsContainer = document.getElementById('malaysia-other-options');
+        const userIdInput = document.getElementById('user-id');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const tabs = document.querySelectorAll('.tab');
+        const tabContents = document.querySelectorAll('.tab-content');
+        
+        // Render product options
+        function renderProductOptions() {
+            // Clear containers
+            diamondOptionsContainer.innerHTML = '';
+            diamondOtherOptionsContainer.innerHTML = '';
+            malaysiaOptionsContainer.innerHTML = '';
+            malaysiaOtherOptionsContainer.innerHTML = '';
+            
+            // Render Diamond options
+            products.diamond.forEach(product => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'diamond-option';
+                optionElement.dataset.type = 'diamond';
+                optionElement.dataset.id = product.diamonds;
+                
+                optionElement.innerHTML = `
+                    <div class="diamond-amount">${product.diamonds} 💎</div>
+                    <div class="diamond-price">Rp ${product.price.toLocaleString('id-ID')},-</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectProduct('diamond', product));
+                
+                diamondOptionsContainer.appendChild(optionElement);
+            });
+            
+            // Render Diamond other options
+            products.diamondOther.forEach(product => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'diamond-option';
+                optionElement.dataset.type = 'diamond-other';
+                optionElement.dataset.id = product.name.replace(/\s+/g, '-').toLowerCase();
+                
+                optionElement.innerHTML = `
+                    <div class="diamond-amount">${product.name}</div>
+                    <div class="diamond-price">Rp ${product.price.toLocaleString('id-ID')},-</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectProduct('diamond-other', product));
+                
+                diamondOtherOptionsContainer.appendChild(optionElement);
+            });
+            
+            // Render Malaysia options
+            products.malaysia.forEach(product => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'diamond-option';
+                optionElement.dataset.type = 'malaysia';
+                optionElement.dataset.id = product.diamonds;
+                
+                optionElement.innerHTML = `
+                    <div class="diamond-amount">${product.diamonds} 💎</div>
+                    <div class="diamond-price">Rp ${product.price.toLocaleString('id-ID')},-</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectProduct('malaysia', product));
+                
+                malaysiaOptionsContainer.appendChild(optionElement);
+            });
+            
+            // Render Malaysia other options
+            products.malaysiaOther.forEach(product => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'diamond-option';
+                optionElement.dataset.type = 'malaysia-other';
+                optionElement.dataset.id = product.name.replace(/\s+/g, '-').toLowerCase();
+                
+                optionElement.innerHTML = `
+                    <div class="diamond-amount">${product.name}</div>
+                    <div class="diamond-price">Rp ${product.price.toLocaleString('id-ID')},-</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectProduct('malaysia-other', product));
+                
+                malaysiaOtherOptionsContainer.appendChild(optionElement);
+            });
+        }
+        
+        // Select product
+        function selectProduct(type, product) {
+            // Remove selected class from all options
+            document.querySelectorAll('.diamond-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            const id = product.diamonds ? product.diamonds : product.name.replace(/\s+/g, '-').toLowerCase();
+            const selectedElement = document.querySelector(`.diamond-option[data-id="${id}"]`);
+            if (selectedElement) {
+                selectedElement.classList.add('selected');
+            }
+            
+            // Set the main product type (diamond/malaysia)
+            if (type.includes('diamond')) {
+                selectedProductType = 'diamond';
+            } else if (type.includes('malaysia')) {
+                selectedProductType = 'malaysia';
+            }
+            
+            selectedProduct = product;
+            
+            // Enable checkout button if all fields are filled
+            updateCheckoutButtonState();
+        }
+        
+        // Update checkout button state based on form completion
+        function updateCheckoutButtonState() {
+            selectedUserId = userIdInput.value.trim();
+            
+            if (selectedUserId && selectedProduct) {
+                checkoutBtn.disabled = false;
+            } else {
+                checkoutBtn.disabled = true;
+            }
+        }
+        
+        // Handle tab switching
+        function switchTab(tabName) {
+            // Update tabs
+            tabs.forEach(tab => {
+                if (tab.dataset.tab === tabName) {
+                    tab.classList.add('active');
+                } else {
+                    tab.classList.remove('active');
+                }
+            });
+            
+            // Update tab contents
+            tabContents.forEach(content => {
+                if (content.id === `${tabName}-tab`) {
+                    content.classList.add('active');
+                } else {
+                    content.classList.remove('active');
+                }
+            });
+            
+            // Clear selection when switching tabs
+            selectedProduct = null;
+            document.querySelectorAll('.diamond-option.selected').forEach(el => {
+                el.classList.remove('selected');
+            });
+            updateCheckoutButtonState();
+            
+            selectedProductType = tabName;
+        }
+        
+        // Handle checkout
+        function handleCheckout() {
+            if (!selectedUserId || !selectedProduct) return;
+            
+            let productName, productAmount;
+            
+            if (selectedProduct.diamonds) {
+                productName = 'Diamond';
+                productAmount = `${selectedProduct.diamonds} 💎`;
+            } else {
+                productName = selectedProduct.name.includes('Membership') ? 'Membership' : selectedProduct.name;
+                productAmount = selectedProduct.name;
+            }
+            
+            const message = `Halo, saya ingin top up Free Fire:
+            
+User ID: ${selectedUserId}
+${selectedProductType === 'malaysia' ? 'Server: Malaysia' : ''}
+Paket ${productName}: ${productAmount}
+Harga: Rp ${selectedProduct.price.toLocaleString('id-ID')},-
+
+Mohon bantu proses pembayarannya. Terima kasih.`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/6282116359852?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        // Event listeners
+        userIdInput.addEventListener('input', updateCheckoutButtonState);
+        checkoutBtn.addEventListener('click', handleCheckout);
+        
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+        });
+        
+        // Initialize
+        renderProductOptions();
+    </script>
+</body>
+</html>

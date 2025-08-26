@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Top Up Genshin Impact</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            background-color: #ffffff;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 500px;
+            margin: 0 auto;
+            background-color: white;
+            min-height: 100vh;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #1E90FF, #4169E1);
+            color: white;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .back-btn {
+            position: absolute;
+            left: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+        }
+        
+        .header h1 {
+            font-size: 22px;
+            margin-bottom: 5px;
+            font-weight: 600;
+        }
+        
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 20px;
+            background-color: #ffffff;
+        }
+        
+        .section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #333;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-title .number {
+            background-color: #1E90FF;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 14px;
+            margin-right: 10px;
+        }
+        
+        .input-group {
+            margin-bottom: 15px;
+        }
+        
+        .input-label {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 8px;
+            display: block;
+        }
+        
+        .input-field {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-size: 15px;
+            background-color: #ffffff;
+        }
+        
+        .note {
+            font-size: 13px;
+            color: #777;
+            margin-top: 5px;
+        }
+        
+        .popular-tag {
+            background-color: #f8f9fa;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            color: #555;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        
+        .edition-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1E90FF;
+            margin: 15px 0 10px;
+            padding-bottom: 5px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .cp-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+        
+        .cp-option {
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 15px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background-color: #ffffff;
+        }
+        
+        .cp-option:hover {
+            border-color: #1E90FF;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .cp-option.selected {
+            border-color: #1E90FF;
+            background-color: #e6f2ff;
+        }
+        
+        .cp-amount {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1E90FF;
+            margin-bottom: 5px;
+        }
+        
+        .cp-price {
+            font-size: 15px;
+            font-weight: 600;
+            color: #333;
+        }
+        
+        .cp-type {
+            font-size: 13px;
+            color: #666;
+            margin-top: 3px;
+        }
+        
+        .checkout-btn {
+            background: linear-gradient(to right, #1E90FF, #4169E1);
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 20px;
+            transition: all 0.3s;
+        }
+        
+        .checkout-btn:hover {
+            opacity: 0.9;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(30, 144, 255, 0.3);
+        }
+        
+        .checkout-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZD0iTTE1LjQxLDE2LjU4TDEwLjgzLDEyTDE1LjQxLDcuNDFMMTQsNkw4LDEyTDE0LDE4TDE1LjQxLDE2LjU4WiIgZmlsbD0id2hpdGUiLz48L3N2Zz4=" alt="Back" class="back-btn" onclick="window.history.back()">
+            <h1>🔥 PRICE LIST GENSHIN IMPACT 🔥</h1>
+            <p>Top up Crystal resmi dan aman</p>
+        </div>
+        
+        <div class="content">
+            <div class="section">
+                <div class="section-title">
+                    <div class="number">1</div>
+                    <span>Masukkan Player ID</span>
+                </div>
+                
+                <div class="input-group">
+                    <label class="input-label">Masukkan UID Genshin Impact</label>
+                    <input type="text" class="input-field" id="player-id" placeholder="Contoh: 123456789">
+                </div>
+                
+                <p class="note">UID bisa ditemukan di menu Profil dalam game</p>
+            </div>
+            
+            <div class="section">
+                <div class="section-title">
+                    <div class="number">2</div>
+                    <span>Pilih Nominal Crystal</span>
+                </div>
+                <div class="popular-tag">5.421 item dibeli dalam satu jam terakhir</div>
+                <div class="popular-tag">⚡ Produk terlaris bulan ini</div>
+                
+                <div class="edition-title">Crystal I</div>
+                <div class="cp-grid" id="crystal1-options">
+                    <!-- Crystal I options will be populated by JavaScript -->
+                </div>
+                
+                <div class="edition-title">Crystal II</div>
+                <div class="cp-grid" id="crystal2-options">
+                    <!-- Crystal II options will be populated by JavaScript -->
+                </div>
+                
+                <div class="edition-title">Produk Lainnya</div>
+                <div class="cp-grid" id="other-options">
+                    <!-- Other products will be populated by JavaScript -->
+                </div>
+            </div>
+            
+            <button id="checkout-btn" class="checkout-btn" disabled>Lanjutkan Pembayaran</button>
+        </div>
+    </div>
+
+    <script>
+        // Product data
+        const products = {
+            crystal1: [
+                { crystal: 60, price: 12000 },
+                { crystal: "300 + 30", price: 59000 },
+                { crystal: "980 + 110", price: 176500 },
+                { crystal: "1980 + 260", price: 379000 },
+                { crystal: "3280 + 600", price: 585000 },
+                { crystal: "6480 + 1600", price: 1165000 }
+            ],
+            crystal2: [
+                { crystal: 60, price: 12000 },
+                { crystal: "300 + 30", price: 57500 },
+                { crystal: "980 + 110", price: 173500 },
+                { crystal: "1980 + 260", price: 375000 },
+                { crystal: "3280 + 600", price: 575000 },
+                { crystal: "6480 + 1600", price: 1148000 }
+            ],
+            other: [
+                { name: "Blessing of the Welkin Moon", price: 57000, note: "Promo" },
+                { name: "Blessing of the Welkin Moon", price: 58500, note: "Regular" }
+            ]
+        };
+        
+        // Selected variables
+        let selectedPlayerId = '';
+        let selectedProduct = null;
+        
+        // DOM elements
+        const crystal1OptionsContainer = document.getElementById('crystal1-options');
+        const crystal2OptionsContainer = document.getElementById('crystal2-options');
+        const otherOptionsContainer = document.getElementById('other-options');
+        const playerIdInput = document.getElementById('player-id');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        
+        // Render product options
+        function renderProductOptions() {
+            // Clear containers
+            crystal1OptionsContainer.innerHTML = '';
+            crystal2OptionsContainer.innerHTML = '';
+            otherOptionsContainer.innerHTML = '';
+            
+            // Render Crystal I options
+            products.crystal1.forEach(product => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'cp-option';
+                optionElement.dataset.edition = 'crystal1';
+                optionElement.dataset.id = product.crystal;
+                
+                optionElement.innerHTML = `
+                    <div class="cp-amount">${product.crystal} Crystal</div>
+                    <div class="cp-price">Rp ${product.price.toLocaleString('id-ID')}</div>
+                    <div class="cp-type">Genshin Impact</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectProduct(product));
+                
+                crystal1OptionsContainer.appendChild(optionElement);
+            });
+            
+            // Render Crystal II options
+            products.crystal2.forEach(product => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'cp-option';
+                optionElement.dataset.edition = 'crystal2';
+                optionElement.dataset.id = product.crystal;
+                
+                optionElement.innerHTML = `
+                    <div class="cp-amount">${product.crystal} Crystal</div>
+                    <div class="cp-price">Rp ${product.price.toLocaleString('id-ID')}</div>
+                    <div class="cp-type">Genshin Impact</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectProduct(product));
+                
+                crystal2OptionsContainer.appendChild(optionElement);
+            });
+            
+            // Render Other products
+            products.other.forEach(product => {
+                const optionElement = document.createElement('div');
+                optionElement.className = 'cp-option';
+                optionElement.dataset.edition = 'other';
+                optionElement.dataset.id = product.name;
+                
+                optionElement.innerHTML = `
+                    <div class="cp-amount">${product.name}</div>
+                    <div class="cp-price">Rp ${product.price.toLocaleString('id-ID')}</div>
+                    <div class="cp-type">${product.note}</div>
+                `;
+                
+                optionElement.addEventListener('click', () => selectProduct(product));
+                
+                otherOptionsContainer.appendChild(optionElement);
+            });
+        }
+        
+        // Select product
+        function selectProduct(product) {
+            // Remove selected class from all options
+            document.querySelectorAll('.cp-option').forEach(el => {
+                el.classList.remove('selected');
+            });
+            
+            // Add selected class to clicked option
+            const selectedElement = document.querySelector(`.cp-option[data-id="${product.crystal || product.name}"]`);
+            if (selectedElement) {
+                selectedElement.classList.add('selected');
+            }
+            
+            selectedProduct = product;
+            
+            // Enable checkout button if all fields are filled
+            updateCheckoutButtonState();
+        }
+        
+        // Update checkout button state based on form completion
+        function updateCheckoutButtonState() {
+            selectedPlayerId = playerIdInput.value.trim();
+            
+            if (selectedPlayerId && selectedProduct) {
+                checkoutBtn.disabled = false;
+            } else {
+                checkoutBtn.disabled = true;
+            }
+        }
+        
+        // Handle checkout
+        function handleCheckout() {
+            if (!selectedPlayerId || !selectedProduct) return;
+            
+            let productDescription;
+            if (selectedProduct.crystal) {
+                productDescription = `Paket: ${selectedProduct.crystal} Crystal`;
+            } else {
+                productDescription = `Produk: ${selectedProduct.name}`;
+            }
+            
+            const message = `Halo, saya ingin top up Genshin Impact:
+            
+UID: ${selectedPlayerId}
+${productDescription}
+Harga: Rp ${selectedProduct.price.toLocaleString('id-ID')}
+
+Mohon bantu proses pembayarannya. Terima kasih.`;
+            
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/6282116359852/?text=${encodedMessage}`;
+            
+            window.open(whatsappUrl, '_blank');
+        }
+        
+        // Event listeners
+        playerIdInput.addEventListener('input', updateCheckoutButtonState);
+        checkoutBtn.addEventListener('click', handleCheckout);
+        
+        // Initialize
+        renderProductOptions();
+    </script>
+</body>
+</html>
